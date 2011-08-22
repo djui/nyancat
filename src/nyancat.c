@@ -32,7 +32,7 @@ int main(void) {
       printf("\x1b[0m"); // clear colour
       for (t = ANGLE; t < ANGLE * (COLOURS_LEN-y); t++) // print distance holder
         putchar(' ');
-      printf("\x1b[1;37m"); // set bright color for cat
+      printf("\x1b[1m"); // set bright color for cat
       puts(CAT[y%COLOURS_LEN + (i%10<COLOURS_LEN ? 0 : COLOURS_LEN)]); // cat
     }
     
