@@ -1,1 +1,1 @@
-ASCII Nyancat terminal implementation in C. Have fun.
+ASCII Nyancat animation for terminal in C. Have fun.
