@@ -65,6 +65,6 @@ int main() {
     printf("\x1b[%dA", COLOURS_LEN); // move up before loop
   }
 
-  puts("\x1b[0m"); // reset colors
+  puts("\x1b[0m"); // reset colours
   return 0;
 }
