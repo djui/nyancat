@@ -1,7 +1,10 @@
 #include <stdio.h>
 
-static const int COLOURS[] = {31, 33, 32, 34, 35}; // r,(o,)y,g,b,p
-static const char FLAG[] = "`*.,*'^";
+static const int   WIDTH=60;
+static const int   ANGLE=4;
+static const int   DELAY=50000;
+static const int   COLOURS[] = {31, 33, 32, 34, 35}; // r,(o,)y,g,b,p
+static const char  FLAG[] = "`*.,*'^";
 static const char* CAT[] = {
   "         ",
   "         ",
@@ -17,22 +20,25 @@ static const char* CAT[] = {
 
 int main(void) {
   int i=0, x, y, t, loop=1;
-
+  const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
+  const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
+  printf("%d\n", FLAG_LEN);
+  
   while (loop) {
-    for (y = 0; y < 5; y++) {
-      printf("\x1b[1;%dm", COLOURS[y]);
-      for (x = 0; x < 60-(5-y); x++)
-        putchar(FLAG[(x+(7-y)+i)%7]);
-      printf("\x1b[0m");
-      for (t = 1; t < 5-y; t++)
+    for (y = 0; y < COLOURS_LEN; y++) { // line loop
+      printf("\x1b[1;%dm", COLOURS[y]); // set rainbow line colour
+      for (x = 0; x < WIDTH - ANGLE*(COLOURS_LEN-y); x++) // rainbow line
+        putchar(FLAG[(x + (FLAG_LEN-y)+i) % FLAG_LEN]); // print rainbow character
+      printf("\x1b[0m"); // clear colour
+      for (t = ANGLE; t < ANGLE * (COLOURS_LEN-y); t++) // print distance holder
         putchar(' ');
-      printf("\x1b[1;37m");
-      puts(CAT[y%5 + (i%10<5 ? 0 : 5)]);
+      printf("\x1b[1;37m"); // set bright color for cat
+      puts(CAT[y%COLOURS_LEN + (i%10<COLOURS_LEN ? 0 : COLOURS_LEN)]); // cat
     }
     
     i++;
-    usleep(50000);
-    puts("\x1b[6A");
+    usleep(DELAY); // wait x ms
+    printf("\x1b[%dA", COLOURS_LEN); // move up before loop
   }
 
   puts("\x1b[0m"); // reset colors
