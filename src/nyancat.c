@@ -3,6 +3,7 @@
 #include <sys/time.h> //
 #include <string.h>   //
 #include <unistd.h>   //
+#include "bass.h"
 
 static const int   WIDTH=60;
 static const int   ANGLE=4;
@@ -41,6 +42,11 @@ int _kbhit() {
 }
 
 int main() {
+  HMUSIC hm;
+  BASS_Init(-1, 44100, 0, 0, NULL);
+  hm = BASS_StreamCreateFile(FALSE, "nyancat.ogg", 0, 0, BASS_MUSIC_LOOP);
+  BASS_ChannelPlay(hm, FALSE);
+
   int i=0, x, y, t;
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
@@ -66,5 +72,7 @@ int main() {
   }
 
   puts("\x1b[0m"); // reset colours
+  BASS_Stop();
+  BASS_Free();
   return 0;
 }
