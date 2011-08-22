@@ -44,7 +44,6 @@ int main() {
   int i=0, x, y, t;
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
-  printf("%d\n", FLAG_LEN);
   
   while (1) {
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
