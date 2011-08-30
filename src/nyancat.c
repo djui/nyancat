@@ -3,7 +3,7 @@
 #include <sys/time.h> //
 #include <string.h>   //
 #include <unistd.h>   //
-#include "bass.h"
+#include <mikmod.h>   // MikMod
 
 static const int   WIDTH=60;
 static const int   ANGLE=4;
@@ -42,14 +42,17 @@ int _kbhit() {
 }
 
 int main() {
-  HMUSIC hm;
-  BASS_Init(-1, 44100, 0, 0, NULL);
-  hm = BASS_StreamCreateFile(FALSE, "nyancat.ogg", 0, 0, BASS_MUSIC_LOOP);
-  BASS_ChannelPlay(hm, FALSE);
-
   int i=0, x, y, t;
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
+  
+  MODULE *module;
+  MikMod_RegisterAllDrivers();
+  MikMod_RegisterAllLoaders();
+  md_mode |= DMODE_SOFT_MUSIC;
+  MikMod_Init("");
+  module = Player_Load("src/Reed - Recycle the cycle.xm", 64, 0);
+  Player_Start(module);
   
   while (1) {
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
@@ -70,9 +73,10 @@ int main() {
     usleep(DELAY); // wait x ms
     printf("\x1b[%dA", COLOURS_LEN); // move up before loop
   }
-
+  
   puts("\x1b[0m"); // reset colours
-  BASS_Stop();
-  BASS_Free();
+  Player_Stop();
+  Player_Free(module);
+  MikMod_Exit();
   return 0;
 }
