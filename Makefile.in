@@ -1,0 +1,6 @@
+CC=@CC@
+CFLAGS=@CFLAGS@ -Os
+LFLAGS=@LFLAGS@
+
+all:
+	$(CC) $(CFLAGS) $(LFLAGS) -o bin/nyancat src/nyancat.c
