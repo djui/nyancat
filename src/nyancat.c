@@ -65,6 +65,7 @@ int main() {
   // module.loop = true; // module.wrap = true;
   Player_Start(module);
   
+  // Animation
   while (1) {
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
       printf("\x1b[1;%dm", COLOURS[y]); // set rainbow line colour
