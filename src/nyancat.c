@@ -4,6 +4,7 @@
 #include <string.h>   //
 #include <unistd.h>   //
 #include <mikmod.h>   // MikMod
+#include "song.h"
 
 static const int   WIDTH=60;
 static const int   ANGLE=4;
@@ -41,17 +42,50 @@ int _kbhit() {
   return r;
 }
 
+// From mmio/mmio.c
+static long _iobase = 0;
+
+static BOOL _mr_eof(MREADER* reader) {
+  return feof(((MFILEREADER *)reader)->file); // TODO
+}
+
+static BOOL _mr_read(MREADER *reader, void *ptr, size_t size) {
+  return fread(ptr, size, 1, ((MFILEREADER *)reader)->file); // TODO
+}
+
+static int _mr_get(MREADER *reader) {
+  return fgetc(((MFILEREADER *)reader)->file); // TODO
+}
+
+static BOOL _mr_seek(MREADER *reader, long offset, int whence) {
+  return fseek(((MFILEREADER *)reader)->file, (whence==SEEK_SET) ? offset+_iobase : offset, whence); // TODO
+}
+
+static long _mr_tell(MREADER *reader) {
+  return ftell(((MFILEREADER *)reader)->file)->_iobase; // TODO
+}
+
 int main() {
   int i=0, x, y, t;
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
   
   MODULE *module;
+  MREADER *mreader;
   MikMod_RegisterAllDrivers();
   MikMod_RegisterAllLoaders();
   md_mode |= DMODE_SOFT_MUSIC;
   MikMod_Init("");
-  module = Player_Load("src/Reed - Recycle the cycle.xm", 64, 0);
+
+  mreader = (MREADER *)calloc(1, sizeof(MREADER));
+  mreader->Eof  = &_mr_eof;
+  mreader->Read = &_mr_read;
+  mreader->Get  = &_mr_get;
+  mreader->Seek = &_mr_seek;
+  mreader->Tell = &_mr_tell;
+
+  module = Player_LoadGeneric(mreader, 64, 0);
+  // module.loop = true; // module.wrap = true;
   Player_Start(module);
   
   while (1) {

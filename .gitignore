@@ -1,5 +1,7 @@
-/bin/*
 /Makefile
 /autom4te.cache
 /config.log
 /config.status
+/bin/*
+/src/song.h
+/.DS_Store

@@ -2,5 +2,9 @@ CC=@CC@
 CFLAGS=@CFLAGS@ -Os
 LFLAGS=@LFLAGS@
 
-all:
+all: song
 	$(CC) $(CFLAGS) $(LFLAGS) -o bin/nyancat src/nyancat.c
+
+song:
+	# Better use objcopy?
+	xxd -i nyancat.xm src/song.h
