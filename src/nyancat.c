@@ -62,7 +62,6 @@ int main() {
   md_mode |= DMODE_SOFT_MUSIC;
   MikMod_Init("");
   module = Player_Load(fname, 64, 0);
-  // module.loop = true; // module.wrap = true;
   Player_Start(module);
   
   // Animation
