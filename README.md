@@ -10,7 +10,7 @@ needed to display it. The music is composed using
 [MilkyTracker](http://milkytracker.org/?about), an open-source multi-plattform
 clone of the old and famous
 [Fasttracker II](http://en.wikipedia.org/wiki/Fast_Tracker).
-[MikMod](http://mikmod.raphnet.net/) librart is use for playback of the module,
+[MikMod](http://mikmod.raphnet.net/) library is use for playback of the module,
 which is almost the only module playing library freely available with complete
 source code and cross-plattform compatibility (Linux, Mac, BSD, Windows). Many
 other libraries like [BassMod](http://www.un4seen.com/bassmod.html),
