@@ -26,3 +26,9 @@ not open source, or don't support all major plattforms.
  * [Original song](http://www.nicomimi.net/play/sm13455867)
  * [Brandon Carrita](http://www.2shared.com/file/HnuKON25/Nyan_Cat_Sheet_Music.html)
    for the music sheets
+
+    ,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`
+    .,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,
+    *.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^         ,---/V\
+    `*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.    ~|__(o.o)
+    ^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'^`*.,*'  UU  UU
