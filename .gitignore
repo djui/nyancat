@@ -3,6 +3,7 @@
 /autom4te.cache
 /config.log
 /config.status
+/configure
 /priv/*
 /bin/*
 /src/music.h
