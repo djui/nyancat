@@ -4116,8 +4116,6 @@ echo "$as_me: error: libmikmod not found" >&2;}
 fi
 
 
-#AC_CHECK_FILE()
-
 CFLAGS=$(libmikmod-config --cflags)
 
 LFLAGS=$(libmikmod-config --libs)
