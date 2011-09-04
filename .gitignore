@@ -1,7 +1,8 @@
+.DS_Store
 /Makefile
 /autom4te.cache
 /config.log
 /config.status
+/priv/*
 /bin/*
-/src/song.h
-/.DS_Store
+/src/music.h
