@@ -4,7 +4,7 @@
 #include <string.h>   //
 #include <unistd.h>   //
 #include <mikmod.h>   // MikMod
-#include "song.h"
+#include "music.h"
 
 static const int   WIDTH=60;
 static const int   ANGLE=4;
@@ -52,7 +52,7 @@ int main() {
   FILE *pFile;
   tmpnam(fname);
   pFile = fopen(fname, "wb");
-  fwrite(nyancat_xm, 1, nyancat_xm_len, pFile);
+  fwrite(src_music_xm, 1, src_music_xm_len, pFile);
   fclose(pFile);
   
   // Load and play the module song
@@ -62,6 +62,7 @@ int main() {
   md_mode |= DMODE_SOFT_MUSIC;
   MikMod_Init("");
   module = Player_Load(fname, 64, 0);
+  module->wrap = 1;
   Player_Start(module);
   
   // Animation

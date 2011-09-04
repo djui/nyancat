@@ -3,8 +3,8 @@ CFLAGS=@CFLAGS@ -Os
 LFLAGS=@LFLAGS@
 
 all: song
-	$(CC) $(CFLAGS) $(LFLAGS) -o bin/nyancat src/nyancat.c
+	$(CC) $(CFLAGS) $(LFLAGS) -o bin/nyancat src/main.c
 
 song:
-	# Better use objcopy?
-	xxd -i nyancat.xm src/song.h
+	# Better use objcopy, but not default installed on Mac
+	xxd -i src/music.xm src/music.h
