@@ -12,7 +12,7 @@ Fink) to install the MikMod library:
 
 For Linux, e.g. use aptitude to install the MikMod library:
 
-    $ sudo apt-get install libmikmod2-dev
+    $ sudo aptitude install libmikmod2-dev
 
 For Windows, visit the [official MikMod website](http://mikmod.raphnet.net/),
 [download and install the library](http://mikmod.raphnet.net/files/libmikmod-3.2.0-beta2.zip)
