@@ -47,7 +47,6 @@ int main() {
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
 
-  
   // Extract module song payload
   char fname[] = "/tmp/file-XXXXXX";
   int fd = mkstemp(fname);
@@ -64,7 +63,7 @@ int main() {
   module = Player_LoadFP(pFile, 64, 0);
   module->wrap = 1;
   Player_Start(module);
-  
+
   // Animation
   while (1) {
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
@@ -77,15 +76,15 @@ int main() {
       printf("\x1b[1m"); // set bright color for cat
       puts(CAT[y%COLOURS_LEN + (i%10<COLOURS_LEN ? 0 : COLOURS_LEN)]); // cat
     }
-    
+
     if (_kbhit()) // key pressed?
       break;
-    
+
     i++;
     usleep(DELAY); // wait x ms
     printf("\x1b[%dA", COLOURS_LEN); // move up before loop
   }
-  
+
   puts("\x1b[0m"); // reset colours
   Player_Stop();
   Player_Free(module);
