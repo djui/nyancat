@@ -46,22 +46,22 @@ int main() {
   int i=0, x, y, t;
   const int COLOURS_LEN = sizeof(COLOURS) / sizeof(int);
   const int FLAG_LEN    = sizeof(FLAG)    / sizeof(char) - 1;
+
   
   // Extract module song payload
-  char fname[L_tmpnam];
-  FILE *pFile;
-  tmpnam(fname);
-  pFile = fopen(fname, "wb");
-  fwrite(src_music_xm, 1, src_music_xm_len, pFile);
-  fclose(pFile);
-  
+  char fname[] = "/tmp/file-XXXXXX";
+  int fd = mkstemp(fname);
+  write(fd, src_music_xm, src_music_xm_len);
+  lseek(fd, 0, SEEK_SET);
+  FILE *pFile = fdopen(fd, "rb");
+
   // Load and play the module song
   MODULE *module;
   MikMod_RegisterAllDrivers();
   MikMod_RegisterAllLoaders();
   md_mode |= DMODE_SOFT_MUSIC;
   MikMod_Init("");
-  module = Player_Load(fname, 64, 0);
+  module = Player_LoadFP(pFile, 64, 0);
   module->wrap = 1;
   Player_Start(module);
   
@@ -90,6 +90,5 @@ int main() {
   Player_Stop();
   Player_Free(module);
   MikMod_Exit();
-  remove(fname);
   return 0;
 }
