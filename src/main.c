@@ -8,7 +8,7 @@
 
 static const int   WIDTH=60;
 static const int   ANGLE=4;
-static const int   DELAY=50000;
+static const int   DELAY=20000;
 static const int   COLOURS[] = {31, 33, 32, 34, 35}; // r,(o,)y,g,b,p
 static const char  FLAG[] = "`*.,*'^";
 static const char* CAT[] = {
@@ -50,7 +50,8 @@ int main() {
   // Extract module song payload
   char fname[] = "/tmp/file-XXXXXX";
   int fd = mkstemp(fname);
-  write(fd, src_music_xm, src_music_xm_len);
+  if (write(fd, src_music_xm, src_music_xm_len) < 0)
+    return -1;
   lseek(fd, 0, SEEK_SET);
   FILE *pFile = fdopen(fd, "rb");
 
@@ -66,6 +67,7 @@ int main() {
 
   // Animation
   while (1) {
+    MikMod_Update();
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
       printf("\x1b[1;%dm", COLOURS[y]); // set rainbow line colour
       for (x = 0; x < WIDTH - ANGLE*(COLOURS_LEN-y); x++) // rainbow line
