@@ -19,9 +19,7 @@ For Windows, visit the [official MikMod website](http://mikmod.raphnet.net/),
 
 ## Compilation
 
-    $ autoconf
-    $ ./configure
-    $ make
+    $ sh compile.sh
 
 ## Execution
 
