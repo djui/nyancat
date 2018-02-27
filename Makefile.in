@@ -4,6 +4,8 @@ LFLAGS=@LFLAGS@
 
 all: song
 	$(CC) $(CFLAGS) $(LFLAGS) -o bin/nyancat src/main.c
+	sudo cp bin/nyancat /usr/local/bin/
+	sudo chmod +x /usr/local/bin/nyancat
 
 song:
 	# Better use objcopy, but not default installed on Mac
