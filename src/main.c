@@ -6,22 +6,35 @@
 #include <mikmod.h>   // MikMod
 #include "music.h"
 
-static const int   WIDTH=60;
-static const int   ANGLE=4;
+static const int   WIDTH=40;
+static const int   ANGLE=0;
 static const int   DELAY=20000;
-static const int   COLOURS[] = {31, 33, 32, 34, 35}; // r,(o,)y,g,b,p
+static const int   COLOURS[] = {31, 33, 32, 36, 34, 35, 31, 33, 32, 36}; // r,y,g,lb,b,p
+//static const int   COLOURS[] = {31, 31, 33, 33, 32, 32, 36, 36, 34, 34}; if you prefer this
 static const char  FLAG[] = "`*.,*'^";
 static const char* CAT[] = {
-  "         ",
-  "         ",
-  " ,---/V\\ ",
-  "~|__(o.o)",
-  " U U U U ",
-  "         ",
-  "         ",
-  " ,---/V\\ ",
-  "~|__(o.o)",
-  "  UU  UU "
+  "   __________________",
+  "  /             __   \\   __",
+  " |  *        * |  \\___|_/  |",
+  " __    |       *     |           |",
+  "|  \\___|    *   *   /   _      _  \\",
+  " \\__   |  *        |   |_|    |_|  |",
+  "    \\__|        *  |  ##     o   ##|",
+  "       |   *        \\ ##|___|___|#/",
+  " /\\____________\\___________/",
+  " |___/\\___|     \\___|\\___|",
+  "                                   ",
+  "                                   ",
+  "   __________________",
+  "  /             __   \\   __",
+  " |  *        * |  \\___|_/  |",
+  "       |       *     |           |",
+  "     __|    *   *   /   _      _  \\",
+  "  __/  |  *        |   |_|    |_|  |",
+  " /  ___|        *  |  ##     o   ##|",
+  "|__/   |   *        \\ ##|___|___|#/",
+  "/ \\____________\\___________/",
+  "|___/\\___|     \\___|\\___| "
 };
 
 int _kbhit() {
@@ -70,13 +83,16 @@ int main() {
     MikMod_Update();
     for (y = 0; y < COLOURS_LEN; y++) { // line loop
       printf("\x1b[1;%dm", COLOURS[y]); // set rainbow line colour
-      for (x = 0; x < WIDTH - ANGLE*(COLOURS_LEN-y); x++) // rainbow line
-        putchar(FLAG[(x + (FLAG_LEN-y)+i) % FLAG_LEN]); // print rainbow character
+      if (y<3 | y>7){
+        for (x = -6; x < WIDTH - ANGLE*(COLOURS_LEN-y); x++) // rainbow line
+          putchar(FLAG[(x + (FLAG_LEN-y)+i) % FLAG_LEN]); // print rainbow character
+      } else {
+        for (x = 0; x < WIDTH - ANGLE*(COLOURS_LEN-y); x++) // rainbow line
+          putchar(FLAG[(x + (FLAG_LEN-y)+i) % FLAG_LEN]); // print rainbow character
+      }
       printf("\x1b[0m"); // clear colour
-      for (t = ANGLE; t < ANGLE * (COLOURS_LEN-y); t++) // print distance holder
-        putchar(' ');
       printf("\x1b[1m"); // set bright color for cat
-      puts(CAT[y%COLOURS_LEN + (i%10<COLOURS_LEN ? 0 : COLOURS_LEN)]); // cat
+      puts(CAT[y%COLOURS_LEN + (i%20<COLOURS_LEN ? 0 : COLOURS_LEN+2)]); // cat
     }
 
     if (_kbhit()) // key pressed?
